@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ورشة | عروض وأسعار الألمنيوم</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div class="brand"><span class="brand-mark">و</span><span>ورشة</span><small>Workshop</small></div>
+        <div class="header-actions">
+          <span class="offline-status"><i></i> يعمل على جهازك</span>
+          <button class="button ghost" id="newQuote">عرض جديد</button>
+        </div>
+      </header>
+
+      <section class="hero">
+        <div>
+          <p class="eyebrow">أداة تسعير للورش</p>
+          <h1>حوّل القياسات إلى عرض سعر<br />وقائمة مواد خلال دقائق.</h1>
+          <p class="hero-copy">احسب الزجاج، مقاطع الألمنيوم، الإكسسوارات والعمالة تلقائياً. بياناتك تبقى محفوظة على هذا الجهاز.</p>
+        </div>
+        <div class="quote-number"><span>رقم العرض</span><strong id="quoteNumber">#0001</strong></div>
+      </section>
+
+      <section class="customer-card panel">
+        <div class="section-heading"><div><p class="eyebrow">01</p><h2>بيانات العميل والمشروع</h2></div><span>أساس عرض السعر</span></div>
+        <div class="form-grid customer-grid">
+          <label>اسم العميل<input id="customerName" placeholder="مثال: أحمد الخطيب" /></label>
+          <label>رقم الهاتف<input id="customerPhone" inputmode="tel" placeholder="07X XXX XXXX" /></label>
+          <label>اسم المشروع<input id="projectName" placeholder="مثال: شقة عبدون" /></label>
+          <label>تاريخ العرض<input id="quoteDate" type="date" /></label>
+        </div>
+      </section>
+
+      <section class="workspace">
+        <div class="panel items-panel">
+          <div class="section-heading"><div><p class="eyebrow">02</p><h2>الأبواب والنوافذ</h2></div><button class="button primary" id="addItem">+ إضافة بند</button></div>
+          <p class="section-note">أدخل القياس بالسنتيمتر. الحساب يشمل 10% هدر مقاطع و5% هدر زجاج.</p>
+          <div class="items-list" id="itemsList"></div>
+          <div class="empty-state" id="emptyState"><span>+</span><p>لم تضف أي بند بعد</p><small>ابدأ بإضافة نافذة أو باب للمشروع.</small></div>
+        </div>
+
+        <aside class="panel totals-panel">
+          <div class="section-heading"><div><p class="eyebrow">03</p><h2>ملخص التسعير</h2></div></div>
+          <div class="pricing-input"><label>تكلفة العمالة (%)<input id="labourRate" type="number" min="0" value="12" /></label><label>هامش الربح (%)<input id="marginRate" type="number" min="0" value="20" /></label></div>
+          <div class="total-lines">
+            <div><span>تكلفة المواد</span><strong id="materialsTotal">0.00 د.أ</strong></div>
+            <div><span>العمالة</span><strong id="labourTotal">0.00 د.أ</strong></div>
+            <div><span>الربح</span><strong id="marginTotal">0.00 د.أ</strong></div>
+          </div>
+          <div class="grand-total"><span>إجمالي عرض السعر</span><strong id="grandTotal">0.00 <small>د.أ</small></strong></div>
+          <button class="button primary full" id="saveQuote">حفظ عرض السعر</button>
+          <button class="button secondary full" id="printQuote">طباعة / حفظ PDF</button>
+        </aside>
+      </section>
+
+      <section class="panel materials-panel">
+        <div class="section-heading"><div><p class="eyebrow">04</p><h2>قائمة المواد المطلوبة</h2></div><span class="muted">تتحدث تلقائياً مع القياسات</span></div>
+        <div class="material-summary" id="materialsSummary"></div>
+      </section>
+    </main>
+
+    <template id="itemTemplate">
+      <article class="item-card">
+        <div class="item-card-top"><strong class="item-title">بند جديد</strong><button class="icon-button remove-item" title="حذف البند">×</button></div>
+        <div class="item-fields">
+          <label>النوع<select class="item-type"><option value="window">نافذة</option><option value="door">باب</option><option value="sliding">شباك سحاب</option></select></label>
+          <label>الوصف<input class="item-name" placeholder="مثال: نافذة غرفة النوم" /></label>
+          <label>العرض (سم)<input class="item-width" type="number" min="1" value="120" /></label>
+          <label>الارتفاع (سم)<input class="item-height" type="number" min="1" value="120" /></label>
+          <label>الكمية<input class="item-qty" type="number" min="1" value="1" /></label>
+          <label>سعر المواد / م²<input class="item-rate" type="number" min="0" value="42" step="0.01" /></label>
+        </div>
+        <div class="item-result"><span>المساحة: <b class="item-area">0.00 م²</b></span><span>تكلفة المواد: <b class="item-cost">0.00 د.أ</b></span></div>
+      </article>
+    </template>
+    <div class="toast" id="toast"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
